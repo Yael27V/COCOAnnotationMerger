@@ -3,27 +3,25 @@ COCO Annotation Merger GUI
 
 Author: Yael Vicente
 Last Updated: March 2025
-Version: 1.0
+Version: 1.1
 
 Description:
     This script defines the main application class and entry point for a graphical
     user interface (GUI) that allows users to merge COCO annotation files.
 
-    It supports three modes of merging:
+    It supports three merge strategies:
         1. Merging multiple JSON files with the same categories.
         2. Merging two JSON files with different categories.
         3. Merging all JSON files from two folders (e.g., strawberries and flowers).
 
-    The GUI is built using Tkinter and follows a modular structure with components
-    for task selection and dedicated UI panels per merge strategy.
+    This version sets a custom application icon using a .ico file.
 """
 
 import tkinter as tk
 from tkinter import Label, Frame
-from tkinter import PhotoImage
 import os
 
-# Import UI components
+# UI Components
 from gui_components.task_selector import TaskSelector
 from gui_components.task_merger_single import SingleMergerUI
 from gui_components.task_merger_dual import DualMergerUI
@@ -32,12 +30,12 @@ from gui_components.task_merger_multi import MultiMergerUI
 
 class COCOAnnotationApp:
     """
-    Main GUI application class for COCO Annotation Merger.
-    Initializes the window, layout, and handles task selection.
+    Main application class for the COCO Annotation Merger GUI.
+    Handles UI setup, layout, and task switching logic.
     """
     def __init__(self, root):
         """
-        Initialize the main window and layout.
+        Initialize the main GUI window.
 
         Args:
             root (tk.Tk): The root Tkinter window.
@@ -47,19 +45,16 @@ class COCOAnnotationApp:
         self.root.geometry("800x800")
         self.root.configure(bg="#e6f0fa")  # Light blue background
 
-        # ======================= Logo Image ======================= #
+        # === Set custom application icon ===
         try:
-            logo_path = os.path.join("assets", "logo.png")  # Ajusta si tu ruta es distinta
-            self.logo_image = PhotoImage(file=logo_path)
-            self.logo_label = tk.Label(root, image=self.logo_image, bg="#e6f0fa")
-            self.logo_label.pack(pady=(10, 5))
+            icon_path = os.path.join("assets", "logo.ico")  # Make sure logo.ico exists
+            self.root.iconbitmap(icon_path)
         except Exception as e:
-            print(f"⚠️ Logo image not loaded: {e}")
-        # ========================================================== #
+            print(f"⚠️ Could not set window icon: {e}")
 
-        # Header label
+        # === Main header ===
         self.header = Label(
-            root,
+            self.root,
             text="COCO Annotation Merger",
             font=("Helvetica", 20, "bold"),
             background="#e6f0fa",
@@ -67,29 +62,29 @@ class COCOAnnotationApp:
         )
         self.header.pack(pady=20)
 
-        # Container where task-specific UI components will be displayed
-        self.main_frame = Frame(root, background="#e6f0fa")
+        # === Main container for UI components ===
+        self.main_frame = Frame(self.root, background="#e6f0fa")
         self.main_frame.pack(fill="both", expand=True, padx=20, pady=10)
 
-        # Task selector menu at the bottom of the window
+        # === Task selector panel ===
         self.task_selector = TaskSelector(self.root, self.select_task)
         self.task_selector.pack(pady=10)
 
-        # Active task frame (e.g., SingleMergerUI, DualMergerUI, etc.)
+        # === Currently selected task panel ===
         self.active_task_frame = None
 
     def select_task(self, task_type):
         """
-        Callback for switching between annotation merge tasks.
+        Switch between task UIs depending on the selected merge strategy.
 
         Args:
-            task_type (str): Type of the merge task. Can be "single", "dual", or "multi".
+            task_type (str): One of "single", "dual", or "multi".
         """
-        # Remove previous task frame if any
+        # Remove previous task frame if present
         if self.active_task_frame:
             self.active_task_frame.destroy()
 
-        # Load new task UI based on selection
+        # Load new task frame
         if task_type == "single":
             self.active_task_frame = SingleMergerUI(self.main_frame)
         elif task_type == "dual":
@@ -97,12 +92,12 @@ class COCOAnnotationApp:
         elif task_type == "multi":
             self.active_task_frame = MultiMergerUI(self.main_frame)
 
-        # Show new UI frame
+        # Display new task frame
         if self.active_task_frame:
             self.active_task_frame.pack(fill="both", expand=True)
 
 
-# Entry point
+# === Entry point ===
 if __name__ == "__main__":
     root = tk.Tk()
     app = COCOAnnotationApp(root)
