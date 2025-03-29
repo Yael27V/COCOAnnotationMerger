@@ -2,25 +2,28 @@
 
 **Author:** Yael Vicente  
 **Last Updated:** March 2025  
-**License:** MIT
+**License:** MIT  
 
 ---
 
 ## 🧾 Description
 
-**COCO Annotation Merger** is a desktop application with a graphical interface (GUI) that allows users to merge annotation files formatted in the [COCO dataset format](https://cocodataset.org/#format-data).  
+**COCO Annotation Merger** is a cross-platform desktop application that provides an intuitive graphical interface for merging COCO-format annotation files used in computer vision tasks such as object detection and instance segmentation.
 
-This tool is especially useful for combining machine learning datasets in object detection, instance segmentation, and annotation tasks.
+Built with **Tkinter** and **Python**, this tool simplifies annotation management for datasets of varying structures or annotation tasks.
 
-### Features
+---
 
-✅ Merge multiple JSON files with the **same categories**  
-✅ Merge two files with **different categories** (e.g., strawberries + flowers)  
-✅ Merge all JSONs from two folders (e.g., for different annotation types)  
-✅ Automatically handle unique image/annotation IDs  
-✅ Prevent category ID conflicts  
-✅ Show per-category annotation stats after merging  
-✅ Intuitive, beginner-friendly **Tkinter GUI**
+## ✨ Features
+
+- ✅ Merge multiple COCO JSON files with the **same category schema**.
+- ✅ Merge **two files with different categories** (e.g., strawberries + flowers).
+- ✅ Merge all annotations from **two folders** and combine them by image.
+- ✅ Automatically remaps **IDs** for images, annotations, and categories.
+- ✅ Prevents **category ID conflicts**.
+- ✅ Displays per-category statistics after merging.
+- ✅ Lightweight, clean, and intuitive GUI.
+- ✅ One-click **.exe** (Windows) and **.AppImage** (Linux) builds.
 
 ---
 
@@ -28,143 +31,156 @@ This tool is especially useful for combining machine learning datasets in object
 
 ![COCO Annotation Merger GUI](assets/screenshot.png)
 
-> Preview of the interface (light theme, blue palette, multi-task options)
-
 ---
 
-## 📂 Project Structure
+## 📁 Project Structure
 
 ```
 COCO_Annotation_Merger/
-├── assets/                           # Logo and image resources
-│   ├── logo.ico                      # Icon for app window
-│   └── logo.png                      # GUI/logo image
-├── gui_components/                   # GUI panels per task
-│   ├── task_selector.py              # Task selection interface
-│   ├── task_merger_single.py         # Merge multiple (same category)
-│   ├── task_merger_dual.py           # Merge 2 files (different categories)
-│   └── task_merger_multi.py          # Merge all from two folders
-├── scripts/                          # Backend logic (POO)
+├── assets/                           # Logo and resources
+│   ├── logo.png                      # App logo
+│   └── logo.ico                      # App icon for Windows
+├── gui_components/                   # Task-based GUI modules
+│   ├── task_selector.py
+│   ├── task_merger_single.py
+│   ├── task_merger_dual.py
+│   └── task_merger_multi.py
+├── scripts/                          # Core merger logic (OOP)
 │   ├── coco_annotation_merger.py
 │   ├── strawberry_flower_annotation.py
 │   └── strawberry_flower_annotations_combiner.py
-├── main.py                           # Entry point of the GUI app
+├── main.py                           # GUI entry point
 ├── requirements.txt                  # Python dependencies
-└── README.md                         # You are here 📘
+├── LICENSE                           # MIT License
+└── README.md                         # You're here 📘
 ```
 
 ---
 
-## 🚀 Installation & Usage
+## 🚀 How to Use
 
-Follow these steps to install and run the app.
+### 🖥️ Option 1: Use as a Desktop App (No Python Needed)
 
-### 1. 🧬 Clone the Repo
+#### 🪟 Windows:
+1. Go to the [Releases](https://github.com/Yael27V/COCO_Annotation_Merger/releases)
+2. Download `COCOAnnotationMerger.exe`
+3. Double-click to launch!
+
+#### 🐧 Linux:
+1. Download the `.AppImage` file from [Releases](https://github.com/Yael27V/COCO_Annotation_Merger/releases)
+2. Make it executable:
+   ```bash
+   chmod +x COCOAnnotationMerger.AppImage
+   ./COCOAnnotationMerger.AppImage
+   ```
+
+---
+
+### 🛠️ Option 2: Run from Source (Python 3.8+)
+
+#### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/COCO_Annotation_Merger.git
 cd COCO_Annotation_Merger
 ```
 
-### 2. 🐍 Create a Virtual Environment (Optional but Recommended)
+#### 2. (Optional) Create Virtual Environment
 
 ```bash
-# Linux/macOS
 python3 -m venv env_gui
-source env_gui/bin/activate
-
-# Windows
-python -m venv env_gui
-env_gui\Scripts\activate
+source env_gui/bin/activate   # or use env_gui\Scripts\activate on Windows
 ```
 
-### 3. 📦 Install Dependencies
+#### 3. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. ▶️ Run the App
+#### 4. Run the GUI
 
 ```bash
 python main.py
 ```
 
-The GUI should launch automatically.
-
 ---
 
-## 🧠 How It Works
+## 🧠 Merge Modes Explained
 
-### 🔹 Mode 1: Merge Multiple JSONs with Same Categories
+### 🔹 Mode 1: Merge Multiple JSON Files (Same Categories)
+- Suitable for annotation files that share identical category sets.
+- Perfect for combining annotations from multiple annotators or batches.
 
-- Use when all annotation files have the same category IDs and names.
-- Automatically resolves image/annotation ID conflicts.
-
-### 🔹 Mode 2: Merge Two JSONs with Different Categories
-
-- For example, one JSON for `fruit_ripe`/`fruit_unripe`, and another for `flower`.
-- The app will reassign the flower category ID to avoid overlaps.
+### 🔹 Mode 2: Merge Two JSONs (Different Categories)
+- Handles merging different task annotations (e.g., `fruit_ripe`, `fruit_unripe` + `flower`).
+- Category IDs are auto-adjusted to prevent overlap.
 
 ### 🔹 Mode 3: Merge All Files from Two Folders
-
-- You select two folders (strawberries and flowers).
-- Each file is associated by image filename and merged.
-- Outputs a unified COCO JSON with updated IDs and categories.
+- Each annotation corresponds to one image.
+- Matches images across folders and consolidates their annotations.
 
 ---
 
-## 📊 Statistics Output
+## 📊 Merging Statistics
 
-After merging, the app displays:
+After merging, the app shows:
 
-- Total number of images merged 🖼️  
-- Total number of annotations 🏷️  
-- Category-wise annotation counts with names and IDs 📚
+- 🖼️ Total number of images
+- 🏷️ Total number of annotations
+- 📚 Breakdown of annotations per category (with names and IDs)
 
 ---
 
-## 🧰 Future Features (Coming Soon)
+## 💡 Upcoming Features
 
-✅ Compute **IoU (Intersection over Union)** between annotations  
-✅ Evaluate **Fleiss' Kappa** inter-annotator agreement  
-✅ Add support for **instance masks**  
-✅ Export annotations to other formats (Pascal VOC, YOLOv8, etc.)  
-✅ Dark mode theme 🌑  
-✅ Drag-and-drop folders support 🖱️  
+- [ ] Compute **IoU (Intersection over Union)** across annotations
+- [ ] Evaluate **Fleiss' Kappa** agreement between annotators
+- [ ] Export summary statistics as JSON/CSV
+- [ ] Format conversion (Pascal VOC, YOLOv8)
+- [ ] Drag & Drop support
+- [ ] Dark mode 🌙
 
 ---
 
 ## 🪟 App Icon
 
-The app uses a custom logo:
+The app uses a custom icon:
 
-```bash
-assets/logo.ico   # Used as GUI window icon
+```
+assets/logo.ico   # Used for GUI window icon (Windows)
+assets/logo.png   # Used for splash/screenshot/logo
 ```
 
-To change the logo:
-- Replace `logo.ico` in the `assets/` folder
-- Use `.ico` format for compatibility on Windows
+> You can replace these with your own logo if desired.
 
 ---
 
-## 🧑‍💻 Maintainer
-
-**Yael Vicente**  
-Director Nacional - IAAS México  
-B.Sc. in Agricultural Mechatronics Engineering (7th Semester)  
-March 2025
-
-📫 Email: yael@example.com (replace with your actual contact)
-
----
-
-## 📄 License
+## 📜 License
 
 This project is licensed under the **MIT License**.  
-Feel free to fork, extend, or contribute.
+You are free to use, modify, and distribute it as needed.
 
 ---
 
-> ⭐ If this project helped you, please consider giving it a star and sharing it with others working with COCO annotations!
+## 👨‍💻 Maintainer
+
+**Yael Vicente**    
+- Agricultural Mechatronics Engineering, 8th Semester  
+- 📧 yaelnaimvicentevaldivieso@gmail.com
+- https://www.linkedin.com/in/yael-vicente-437467235/
+
+---
+
+## ⭐ Contributing
+
+Pull requests and feedback are welcome!  
+If this project helps you, please ⭐ star the repo and share it with your colleagues in the annotation or ML community.
+
+---
+
+## 🙏 Acknowledgements
+
+Thanks to the open-source community and the creators of the COCO dataset format for building the foundation of modern computer vision annotation standards.
+
+---

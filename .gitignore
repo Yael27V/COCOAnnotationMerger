@@ -3,22 +3,80 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# Virtual environment
-env*/
+# Virtual environments
+env/
+env_*/
 .venv/
+.venv_*/
+venv/
+venv_*/
+ENV/
 env_gui/
+env_annotations/
 
 # Distribution / packaging
 build/
 dist/
 *.egg-info/
-
-# Tkinter cache
-*.tcl
-
-# PyInstaller
 *.spec
 
-# System files
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.cache
+.pytest_cache/
+
+# PyInstaller specific
+*.manifest
+*.spec
+
+# GUI artifacts
+assets/__pycache__/
+gui_components/__pycache__/
+scripts/__pycache__/
+
+# macOS
 .DS_Store
+
+# Windows
 Thumbs.db
+desktop.ini
+
+# Linux
+*~
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+
+# System files
+*.swp
+*.swo
+
+# AppImage build cache (if used)
+*.AppImage
+*.AppDir/
+appimage-build/
+
+# Ignore screenshots or exported results (optional)
+screenshots/
+*.png
+*.jpg
+
+# Ignore secrets or API keys (just in case)
+*.env
+.env.*
+
