@@ -1,8 +1,1 @@
-[Desktop Entry]
-Type=Application
-Name=COCO Annotation Merger
-Exec=COCOAnnotationMerger
-Icon=logo
-Categories=Utility;
-Comment=GUI tool to merge COCO annotation files
-Terminal=false
+usr/share/applications/COCOAnnotationMerger.desktop

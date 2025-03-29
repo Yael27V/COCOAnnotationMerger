@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=COCO Annotation Merger
+Exec=COCOAnnotationMerger
+Icon=logo
+Type=Application
+Categories=Utility;
