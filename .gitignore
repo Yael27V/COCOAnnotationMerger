@@ -1,10 +1,24 @@
+# Byte-compiled / optimized / DLL files
 __pycache__/
-*.pyc
-.env
-*.log
-dist/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+env*/
+.venv/
+env_gui/
+
+# Distribution / packaging
 build/
+dist/
+*.egg-info/
+
+# Tkinter cache
+*.tcl
+
+# PyInstaller
 *.spec
-*.DS_Store
-*.egg-info
-.env/
+
+# System files
+.DS_Store
+Thumbs.db

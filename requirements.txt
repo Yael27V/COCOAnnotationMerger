@@ -1,1 +1,21 @@
+# requirements.txt
+
+# GUI
+tk
+
+# Image processing
 Pillow
+
+# JSON processing (built-in but included for clarity)
+jsonschema
+
+# Optional: platform-specific enhancements
+platformdirs
+
+# Strict version control (adjust if needed)
+# Pillow >= 8.0.0 recommended for handling RGBA and transparency
+Pillow>=8.0.0
+
+# Optional for future metrics (you can uncomment when needed)
+# numpy
+# scipy
