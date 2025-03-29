@@ -80,3 +80,4 @@ screenshots/
 *.env
 .env.*
 
+test.json
