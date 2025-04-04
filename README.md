@@ -38,24 +38,24 @@ Built with **Tkinter** and **Python**, this tool simplifies annotation managemen
 
 ```
 COCO_Annotation_Merger/
-├── assets/                           # Logo and resources
-│   ├── logo.png                      # App logo
-│   └── logo.ico                      # App icon for Windows
-├── gui_components/                   # Task-based GUI modules
-│   ├── task_selector.py
-│   ├── task_merger_single.py
-│   ├── task_merger_dual.py
-│   ├── task_merger_multi.py
-│   └── task_convert_segment_to_bbox.py
-├── scripts/                          # Core merger logic (OOP)
+├── app/
+│   ├── assets/                                    # Logo and resources
+│   │   └── logo.ico
+│   └── gui_components/                            # Task-based GUI modules
+│       ├── task_convert_segment_to_bbox.py
+│       ├── task_merger_dual.py
+│       ├── task_merger_multi.py
+│       ├── task_merger_single.py
+│       └── task_selector.py
+├── scripts/                                       # Core merger logic (OOP)
 │   ├── coco_annotation_merger.py
+│   ├── convert_segmentation_to_bbox.py
 │   ├── strawberry_flower_annotation.py
-│   ├── strawberry_flower_annotations_combiner.py
-│   └── coco_segmentation_to_bbox.py
-├── main.py                           # GUI entry point
-├── requirements.txt                  # Python dependencies
-├── LICENSE                           # MIT License
-└── README.md                         # You're here 📘
+│   └── strawberry_flower_annotations_combiner.py
+├── main.py                                        # GUI entry point
+├── requirements.txt                               # Python dependencies
+├── LICENSE                                        # MIT License
+└── README.md                                      # You're here 📘
 ```
 
 ---

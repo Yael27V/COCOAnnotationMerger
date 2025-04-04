@@ -69,15 +69,11 @@ desktop.ini
 # AppImage build cache (if used)
 # Exclude AppDir and AppImage build artifacts
 AppDir/
-*.AppImage.*
+*.AppImage.1
+*.AppImage.2
 *.AppImage
 *.AppDir/
 appimage-build/
-
-# Ignore screenshots or exported results (optional)
-screenshots/
-*.png
-*.jpg
 
 # Ignore secrets or API keys (just in case)
 *.env
