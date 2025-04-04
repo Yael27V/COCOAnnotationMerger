@@ -4,6 +4,7 @@ COCO Annotation Merger GUI
 Author: Yael Vicente
 Last Updated: March 2025
 Version: 1.0
+Last Updated: April 4, 2025
 
 Description:
     This script defines the main application class and entry point for a graphical
@@ -29,6 +30,7 @@ from gui_components.task_selector import TaskSelector
 from gui_components.task_merger_single import SingleMergerUI
 from gui_components.task_merger_dual import DualMergerUI
 from gui_components.task_merger_multi import MultiMergerUI
+from gui_components.task_convert_segment_to_bbox import SegmentationToBBoxUI
 
 
 class COCOAnnotationApp:
@@ -45,7 +47,7 @@ class COCOAnnotationApp:
         """
         self.root = root
         self.root.title("COCO Annotation Merger")
-        self.root.geometry("800x800")
+        self.root.geometry("800x850")
         self.root.configure(bg="#e6f0fa")  # Light blue background
 
         # Cross-platform icon support
@@ -107,6 +109,8 @@ class COCOAnnotationApp:
             self.active_task_frame = DualMergerUI(self.main_frame)
         elif task_type == "multi":
             self.active_task_frame = MultiMergerUI(self.main_frame)
+        elif task_type == "Bbox":
+            self.active_task_frame = SegmentationToBBoxUI(self.main_frame)
 
         # Show new UI frame
         if self.active_task_frame:

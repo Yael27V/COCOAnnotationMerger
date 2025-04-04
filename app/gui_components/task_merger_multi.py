@@ -1,9 +1,10 @@
-"""
+""" 
 MultiMergerUI - GUI Component for Merging Annotations from Two Folders (Strawberries + Flowers)
 
 Author: Yael Vicente
 Date: March 28, 2025
-Version: 1.0
+Version: 2.0
+Last Updated: April 4, 2025
 
 Description:
     This component provides a graphical interface to merge all COCO annotations from two separate
@@ -11,6 +12,7 @@ Description:
 
         - Folder selection for strawberry and flower annotations.
         - Output file path definition.
+        - Optional conversion of masks to bounding boxes only.
         - Execution of merging using a POO-based backend.
         - Display of merge statistics: total images, annotations, and per-category breakdown.
 """
@@ -19,6 +21,7 @@ import tkinter as tk
 from tkinter import filedialog, messagebox
 from tkinter.ttk import Label, Entry
 from scripts.strawberry_flower_annotations_combiner import COCOAnnotationCombiner
+from scripts.convert_segmentation_to_bbox import COCOSegmentationToBBoxConverter
 import json
 
 
@@ -31,6 +34,7 @@ class MultiMergerUI(tk.Frame):
         dir_straw (tk.StringVar): Path to strawberry annotation folder.
         dir_flower (tk.StringVar): Path to flower annotation folder.
         output_file (tk.StringVar): Destination path for the merged annotation JSON.
+        annotation_format (tk.StringVar): Option to keep segmentations or use only bounding boxes.
         stats_label (tk.Label): Optional stats label displayed after merging.
     """
 
@@ -39,6 +43,7 @@ class MultiMergerUI(tk.Frame):
         self.dir_straw = tk.StringVar()
         self.dir_flower = tk.StringVar()
         self.output_file = tk.StringVar()
+        self.annotation_format = tk.StringVar(value="with_masks")
         self.stats_label = None
         self._build_ui()
 
@@ -55,6 +60,35 @@ class MultiMergerUI(tk.Frame):
         self._create_path_selector("Strawberry annotations directory:", self.dir_straw, self.browse_straw_dir)
         self._create_path_selector("Flower annotations directory:", self.dir_flower, self.browse_flower_dir)
         self._create_path_selector("Output file path (.json):", self.output_file, self.save_output)
+
+        format_frame = tk.Frame(self, bg="#e6f0fa")
+        format_frame.pack(pady=4)
+
+        tk.Label(
+            format_frame,
+            text="Annotation Format:",
+            font=("Helvetica", 10, "bold"),
+            bg="#e6f0fa",
+            fg="#003366"
+        ).pack(side="left", padx=10)
+
+        tk.Radiobutton(
+            format_frame,
+            text="With Masks",
+            variable=self.annotation_format,
+            value="with_masks",
+            bg="#e6f0fa",
+            font=("Helvetica", 10)
+        ).pack(side="left", padx=10)
+
+        tk.Radiobutton(
+            format_frame,
+            text="Bounding Boxes Only",
+            variable=self.annotation_format,
+            value="bbox_only",
+            bg="#e6f0fa",
+            font=("Helvetica", 10)
+        ).pack(side="left", padx=10)
 
         # Main action button
         tk.Button(
@@ -151,6 +185,11 @@ class MultiMergerUI(tk.Frame):
                 self.output_file.get()
             )
             combiner.run()
+
+            if self.annotation_format.get() == "bbox_only":
+                converter = COCOSegmentationToBBoxConverter(self.output_file.get(), self.output_file.get())
+                converter.convert()
+
             self.display_stats(self.output_file.get())
             messagebox.showinfo("Success", f"Merged annotation saved to:\n{self.output_file.get()}")
         except Exception as e:
@@ -177,7 +216,7 @@ class MultiMergerUI(tk.Frame):
             counter[cat_id] = counter.get(cat_id, 0) + 1
 
         categories = {cat["id"]: cat["name"] for cat in data["categories"]}
-        stat_text = f"📊 Merged Statistics:\n- Total Images: {total_images}\n- Total Annotations: {total_anns}\n"
+        stat_text = f"\U0001F4CA Merged Statistics:\n- Total Images: {total_images}\n- Total Annotations: {total_anns}\n"
         for cat_id, count in counter.items():
             stat_text += f"- {categories.get(cat_id, 'Unknown')} (ID {cat_id}): {count}\n"
 

@@ -3,14 +3,17 @@ SingleMergerUI - GUI Component for Merging Multiple COCO Files with the Same Cat
 
 Author: Yael Vicente
 Date: March 28, 2025
-Version: 1.0
+Version: 2.0
+Last Updated: April 4, 2025
 
 Description:
     This class defines the GUI component for merging multiple COCO annotation files 
     that share the same categories. It allows the user to:
         - Select an input directory with JSON files.
         - Choose an output destination for the merged JSON.
+        - Select the annotation format (with masks or only bounding boxes).
         - Start the merge operation.
+        - Automatically convert segmentations to bounding boxes if desired.
         - View summary statistics after the merge.
 """
 
@@ -19,6 +22,7 @@ from tkinter import filedialog, messagebox
 from tkinter.ttk import Label, Entry
 from pathlib import Path
 from scripts.coco_annotation_merger import COCOAnnotationMerger
+from scripts.convert_segmentation_to_bbox import COCOSegmentationToBBoxConverter
 
 
 class SingleMergerUI(tk.Frame):
@@ -29,17 +33,19 @@ class SingleMergerUI(tk.Frame):
         input_dir (tk.StringVar): Directory containing input JSON files.
         output_file (tk.StringVar): Destination path for the merged output JSON.
         stats_label (tk.Label): Optional label displaying summary statistics after merge.
+        annotation_format (tk.StringVar): Selected output format (with_masks or bbox_only).
     """
 
     def __init__(self, master):
         super().__init__(master, bg="#e6f0fa")
         self.input_dir = tk.StringVar()
         self.output_file = tk.StringVar()
+        self.annotation_format = tk.StringVar(value="with_masks")
         self.stats_label = None
         self._build_ui()
 
     def _build_ui(self):
-        """Builds the full UI layout including labels, entry fields and buttons."""
+        """Builds the full UI layout including labels, entry fields, format selector and buttons."""
         Label(
             self,
             text="Merge Multiple COCO Files (Same Categories)",
@@ -50,6 +56,36 @@ class SingleMergerUI(tk.Frame):
 
         self._create_path_selector("Input annotations directory:", self.input_dir, self.browse_input_dir)
         self._create_path_selector("Output File (.json):", self.output_file, self.browse_output_file)
+
+        # Format selection (masks or bbox)
+        format_frame = tk.Frame(self, bg="#e6f0fa")
+        format_frame.pack(pady=4)
+
+        tk.Label(
+            format_frame,
+            text="Annotation Format:",
+            font=("Helvetica", 10, "bold"),
+            bg="#e6f0fa",
+            fg="#003366"
+        ).pack(side="left", padx=10)
+
+        tk.Radiobutton(
+            format_frame,
+            text="With Masks",
+            variable=self.annotation_format,
+            value="with_masks",
+            bg="#e6f0fa",
+            font=("Helvetica", 10)
+        ).pack(side="left", padx=10)
+
+        tk.Radiobutton(
+            format_frame,
+            text="Bounding Boxes Only",
+            variable=self.annotation_format,
+            value="bbox_only",
+            bg="#e6f0fa",
+            font=("Helvetica", 10)
+        ).pack(side="left", padx=10)
 
         # Main button to run the merge operation
         tk.Button(
@@ -66,19 +102,10 @@ class SingleMergerUI(tk.Frame):
         ).pack(pady=10)
 
     def _create_path_selector(self, label_text, variable, browse_command):
-        """
-        Creates a labeled input field with a browse button.
-
-        Args:
-            label_text (str): Text displayed above the input field.
-            variable (tk.StringVar): Tkinter variable to bind input value.
-            browse_command (callable): Function triggered on 'Browse' click.
-        """
-        # Outer container
+        """Creates a labeled input field with a browse button."""
         container = tk.Frame(self, bg="#e6f0fa")
         container.pack(fill="x", padx=40, pady=8)
 
-        # Label
         label = tk.Label(
             container,
             text=label_text,
@@ -88,7 +115,6 @@ class SingleMergerUI(tk.Frame):
         )
         label.pack(anchor="w", pady=(0, 4))
 
-        # Entry + Browse button frame
         entry_frame = tk.Frame(container, bg="#e0e0e0")
         entry_frame.pack(fill="x")
 
@@ -142,18 +168,18 @@ class SingleMergerUI(tk.Frame):
         try:
             merger = COCOAnnotationMerger(input_path, output_path)
             merger.run()
+
+            if self.annotation_format.get() == "bbox_only":
+                converter = COCOSegmentationToBBoxConverter(output_path, output_path)
+                converter.convert()
+
             messagebox.showinfo("Success", f"Merged annotation saved to:\n{output_path}")
             self.display_stats(merger.merged_data)
         except Exception as e:
             messagebox.showerror("Error", f"An error occurred:\n{str(e)}")
 
     def display_stats(self, data):
-        """
-        Displays summary statistics of the merged annotation result.
-
-        Args:
-            data (dict): Merged COCO-format annotation dictionary.
-        """
+        """Displays summary statistics of the merged annotation result."""
         if self.stats_label:
             self.stats_label.destroy()
 
