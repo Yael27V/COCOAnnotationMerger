@@ -67,6 +67,9 @@ desktop.ini
 *.swo
 
 # AppImage build cache (if used)
+# Exclude AppDir and AppImage build artifacts
+AppDir/
+*.AppImage.*
 *.AppImage
 *.AppDir/
 appimage-build/

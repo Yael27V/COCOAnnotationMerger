@@ -1,7 +1,7 @@
-# 🧠 COCO Annotation Merger - GUI Tool
+## 🧠 COCO Annotation Merger - GUI Tool
 
 **Author:** Yael Vicente  
-**Last Updated:** March 2025  
+**Last Updated:** April 2025  
 **License:** MIT  
 
 ---
@@ -19,6 +19,7 @@ Built with **Tkinter** and **Python**, this tool simplifies annotation managemen
 - ✅ Merge multiple COCO JSON files with the **same category schema**.
 - ✅ Merge **two files with different categories** (e.g., strawberries + flowers).
 - ✅ Merge all annotations from **two folders** and combine them by image.
+- ✅ Convert merged annotations to **bounding boxes only** (masks removed).
 - ✅ Automatically remaps **IDs** for images, annotations, and categories.
 - ✅ Prevents **category ID conflicts**.
 - ✅ Displays per-category statistics after merging.
@@ -44,11 +45,13 @@ COCO_Annotation_Merger/
 │   ├── task_selector.py
 │   ├── task_merger_single.py
 │   ├── task_merger_dual.py
-│   └── task_merger_multi.py
+│   ├── task_merger_multi.py
+│   └── task_convert_segment_to_bbox.py
 ├── scripts/                          # Core merger logic (OOP)
 │   ├── coco_annotation_merger.py
 │   ├── strawberry_flower_annotation.py
-│   └── strawberry_flower_annotations_combiner.py
+│   ├── strawberry_flower_annotations_combiner.py
+│   └── coco_segmentation_to_bbox.py
 ├── main.py                           # GUI entry point
 ├── requirements.txt                  # Python dependencies
 ├── LICENSE                           # MIT License
@@ -120,11 +123,16 @@ python main.py
 - Each annotation corresponds to one image.
 - Matches images across folders and consolidates their annotations.
 
+### 🔹 Mode 4: Convert COCO to Bounding Boxes Only
+- Removes segmentations from all annotations.
+- Keeps `bbox`, `area`, and `category_id` intact.
+- Useful for converting segmentation tasks into detection-only datasets.
+
 ---
 
 ## 📊 Merging Statistics
 
-After merging, the app shows:
+After merging or converting, the app shows:
 
 - 🖼️ Total number of images
 - 🏷️ Total number of annotations
