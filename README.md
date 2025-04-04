@@ -30,7 +30,7 @@ Built with **Tkinter** and **Python**, this tool simplifies annotation managemen
 
 ## 📸 Screenshot
 
-![COCO Annotation Merger GUI](assets/screenshot.png)
+![COCO Annotation Merger GUI](app/assets/screenshot.png)
 
 ---
 
@@ -65,12 +65,12 @@ COCO_Annotation_Merger/
 ### 🖥️ Option 1: Use as a Desktop App (No Python Needed)
 
 #### 🪟 Windows:
-1. Go to the [Releases](https://github.com/Yael27V/COCO_Annotation_Merger/releases)
+1. Go to the [Releases](https://github.com/Yael27V/COCOAnnotationMerger/releases/tag/v1.1.0)
 2. Download `COCOAnnotationMerger.exe`
 3. Double-click to launch!
 
 #### 🐧 Linux:
-1. Download the `.AppImage` file from [Releases](https://github.com/Yael27V/COCO_Annotation_Merger/releases)
+1. Download the `.AppImage` file from [Releases](https://github.com/Yael27V/COCOAnnotationMerger/releases/tag/v1.1.0)
 2. Make it executable:
    ```bash
    chmod +x COCOAnnotationMerger.AppImage
@@ -84,7 +84,7 @@ COCO_Annotation_Merger/
 #### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/COCO_Annotation_Merger.git
+git clone https://github.com/Yael27V/COCO_Annotation_Merger.git
 cd COCO_Annotation_Merger
 ```
 

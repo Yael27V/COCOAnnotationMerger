@@ -1,9 +1,13 @@
-# Byte-compiled / optimized / DLL files
+# ===========================
+# PYTHON BUILD AND CACHE
+# ===========================
 __pycache__/
 *.py[cod]
 *$py.class
 
-# Virtual environments
+# ===========================
+# VIRTUAL ENVIRONMENTS
+# ===========================
 env/
 env_*/
 .venv/
@@ -14,69 +18,93 @@ ENV/
 env_gui/
 env_annotations/
 
-# Distribution / packaging
+# ===========================
+# DISTRIBUTION / PACKAGING
+# ===========================
 build/
 dist/
 *.egg-info/
-*.spec
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.cache
-.pytest_cache/
-
-# PyInstaller specific
 *.manifest
 *.spec
+appimage-build/
 
-# GUI artifacts
-assets/__pycache__/
-gui_components/__pycache__/
-scripts/__pycache__/
+# ===========================
+# INSTALLER FILES
+# ===========================
+*.AppImage
+*.AppImage.1
+*.AppImage.2
+AppDir/
+*.AppDir/
 
-# macOS
-.DS_Store
-
-# Windows
-Thumbs.db
-desktop.ini
-
-# Linux
-*~
-
-# VS Code
-.vscode/
-
-# PyCharm
-.idea/
-
-# Logs and temporary files
+# ===========================
+# LOGS AND TEMP FILES
+# ===========================
 *.log
 *.tmp
 *.bak
-
-# System files
 *.swp
 *.swo
+.cache
+.pytest_cache/
+pip-log.txt
+pip-delete-this-directory.txt
 
-# AppImage build cache (if used)
-# Exclude AppDir and AppImage build artifacts
-AppDir/
-*.AppImage.1
-*.AppImage.2
-*.AppImage
-*.AppDir/
-appimage-build/
-
-# Ignore secrets or API keys (just in case)
-*.env
-.env.*
-
+# ===========================
+# TEST / DEV FILES
+# ===========================
 test.json
+
+# ===========================
+# IDE / EDITOR CONFIG
+# ===========================
+.vscode/
+.idea/
+
+# ===========================
+# OS GENERATED FILES
+# ===========================
+.DS_Store
+Thumbs.db
+desktop.ini
+*~
+
+# ===========================
+# BYTECODE IN SUBDIRS
+# ===========================
+app/assets/__pycache__/
+app/gui_components/__pycache__/
+scripts/__pycache__/
+
+# ===========================
+# ALLOW ONLY SPECIFIED STRUCTURE
+# ===========================
+
+# Ignore everything by default
+*
+
+# But allow these specific files and folders
+!app/
+!app/assets/
+!app/assets/logo.ico
+!app/assets/logo.png
+!app/assets/screenshot.png
+!app/gui_components/
+!app/gui_components/task_convert_segment_to_bbox.py
+!app/gui_components/task_merger_dual.py
+!app/gui_components/task_merger_multi.py
+!app/gui_components/task_merger_single.py
+!app/gui_components/task_selector.py
+
+!scripts/
+!scripts/coco_annotation_merger.py
+!scripts/convert_segmentation_to_bbox.py
+!scripts/strawberry_flower_annotation.py
+!scripts/strawberry_flower_annotations_combiner.py
+
+!build.sh
+!build_windows.sh
+!main.py
+!requirements.txt
+!LICENSE
+!README.md
