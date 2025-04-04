@@ -39,23 +39,29 @@ Built with **Tkinter** and **Python**, this tool simplifies annotation managemen
 ```
 COCO_Annotation_Merger/
 ├── app/
-│   ├── assets/                                    # Logo and resources
-│   │   └── logo.ico
-│   └── gui_components/                            # Task-based GUI modules
-│       ├── task_convert_segment_to_bbox.py
-│       ├── task_merger_dual.py
-│       ├── task_merger_multi.py
-│       ├── task_merger_single.py
-│       └── task_selector.py
-├── scripts/                                       # Core merger logic (OOP)
-│   ├── coco_annotation_merger.py
-│   ├── convert_segmentation_to_bbox.py
-│   ├── strawberry_flower_annotation.py
-│   └── strawberry_flower_annotations_combiner.py
-├── main.py                                        # GUI entry point
-├── requirements.txt                               # Python dependencies
-├── LICENSE                                        # MIT License
-└── README.md                                      # You're here 📘
+│   ├── assets/                             # Logo and resources
+│   │   ├── logo.ico
+|   |   ├── logo.png
+|   |   └── screenshot.png
+│   ├── gui_components/                     # Task-based GUI modules
+│   │   ├── task_convert_segment_to_bbox.py
+│   │   ├── task_merger_dual.py
+│   │   ├── task_merger_multi.py
+│   │   ├── task_merger_single.py
+│   │   └── task_selector.py
+│   ├── scripts/                            # Core merger logic (OOP)
+│   │   ├── coco_annotation_merger.py
+│   │   ├── convert_segmentation_to_bbox.py
+│   │   ├── strawberry_flower_annotation.py
+│   │   └── strawberry_flower_annotations_combiner.py
+│   └── main.py                             # GUI entry point
+├── requirements.txt                        # Python dependencies
+├── LICENSE                                 # MIT License
+├── .gitignore
+├── build_linux.sh                          # File to automate app creation on Linux
+├── build_windows.sh                        # File to automate app creation on windows
+└── README.md                               # You're here 📘
+
 ```
 
 ---

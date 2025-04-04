@@ -85,6 +85,7 @@ scripts/__pycache__/
 
 # But allow these specific files and folders
 !app/
+!app/main.py
 !app/assets/
 !app/assets/logo.ico
 !app/assets/logo.png
@@ -104,7 +105,6 @@ scripts/__pycache__/
 
 !build.sh
 !build_windows.sh
-!main.py
 !requirements.txt
 !LICENSE
 !README.md
