@@ -110,7 +110,7 @@ pip install -r requirements.txt
 #### 4. Run the GUI
 
 ```bash
-python main.py
+python app/main.py
 ```
 
 ---
